@@ -239,8 +239,8 @@
             width: 100%;
             max-width: 500px;
             aspect-ratio: 1;
-            /* Show white background and frame immediately */
-            background: #ffffff;
+            /* Display frame immediately on dark background like the example */
+            background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
             border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 15px;
             overflow: hidden;
@@ -429,11 +429,14 @@
         canvas.height = 1024;
 
         // Load frame image
-        frameImage.crossOrigin = "anonymous";
-        frameImage.src = '/images/first-snow.png';
+        frameImage.src = 'images/first-snow.png';
 
         frameImage.onload = function() {
             drawCanvas();
+        };
+
+        frameImage.onerror = function() {
+            console.log('[v0] Error loading frame image from images/first-snow.png');
         };
 
         // Upload image
@@ -525,8 +528,8 @@
         });
 
         function drawCanvas() {
-            // Clear with white background
-            ctx.fillStyle = '#ffffff';
+            // Clear with dark background
+            ctx.fillStyle = '#2a2a2a';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
             // Draw user image if exists
@@ -552,7 +555,7 @@
         // Download button
         downloadBtn.addEventListener('click', function() {
             const link = document.createElement('a');
-            link.download = 'beritajkt48-twibbon-first-snow.png';
+            link.download = 'jkt48-twibbon-first-snow.png';
             link.href = canvas.toDataURL('image/png');
             link.click();
         });

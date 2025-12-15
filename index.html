@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JKT48 Twibbon The First Snow</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 25%, #2d2d2d 50%, #1a1a1a 75%, #0a0a0a 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 50%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #b0b0b0;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 968px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            header {
+                padding: 30px 15px;
+            }
+        }
+
+        .panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .panel:hover {
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .panel h2 {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            color: #ffffff;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .upload-section {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .upload-btn-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .upload-btn {
+            border: 2px dashed rgba(255, 255, 255, 0.25);
+            color: #ffffff;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            padding: 50px 20px;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .upload-btn:hover {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .upload-btn-wrapper input[type=file] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+
+        .upload-icon {
+            font-size: 3.5rem;
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .control-group label {
+            font-weight: 600;
+            color: #d0d0d0;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 4px;
+            outline: none;
+            -webkit-appearance: none;
+            transition: background 0.3s ease;
+        }
+
+        input[type="range"]:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.6), 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+            cursor: pointer;
+            border-radius: 50%;
+            border: none;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.6), 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        input[type="range"]::-moz-range-thumb:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .preview-panel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+        }
+
+        #canvasContainer {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            aspect-ratio: 1;
+            /* Show white background and frame immediately */
+            background: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        #canvas {
+            max-width: 100%;
+            max-height: 100%;
+            cursor: move;
+            display: block;
+        }
+
+        /* Remove placeholder text display */
+        .placeholder-text {
+            display: none;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #ffffff 0%, #d0d0d0 100%);
+            color: #000000;
+            border: none;
+            padding: 16px 45px;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 6px 25px rgba(255, 255, 255, 0.25);
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .download-btn:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 35px rgba(255, 255, 255, 0.35);
+            background: linear-gradient(135deg, #ffffff 0%, #e8e8e8 100%);
+        }
+
+        .download-btn:active:not(:disabled) {
+            transform: translateY(-1px);
+        }
+
+        .download-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .instructions {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 30px;
+            color: #b0b0b0;
+            line-height: 1.9;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .instructions h3 {
+            color: #ffffff;
+            margin-bottom: 18px;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .instructions ol {
+            margin-left: 25px;
+        }
+
+        .instructions li {
+            margin-bottom: 12px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #707070;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 768px) {
+            .panel {
+                padding: 25px;
+            }
+            
+            .upload-btn {
+                padding: 40px 15px;
+            }
+            
+            .download-btn {
+                padding: 14px 35px;
+                font-size: 1rem;
+            }
+            
+            .instructions {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>JKT48 Twibbon</h1>
+            <p class="subtitle">The First Snow</p>
+        </header>
+
+        <div class="main-content">
+            <div class="panel">
+                <h2>Upload & Edit</h2>
+                <div class="upload-section">
+                    <div class="upload-btn-wrapper">
+                        <div class="upload-btn">
+                            <span class="upload-icon">📷</span>
+                            <span>Pilih Foto</span>
+                        </div>
+                        <input type="file" id="imageUpload" accept="image/*" />
+                    </div>
+
+                    <div class="controls">
+                        <div class="control-group">
+                            <label for="scaleRange">Ukuran Foto</label>
+                            <input type="range" id="scaleRange" min="50" max="200" value="100" />
+                        </div>
+                        <div class="control-group">
+                            <label for="rotateRange">Rotasi Foto</label>
+                            <input type="range" id="rotateRange" min="0" max="360" value="0" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel preview-panel">
+                <h2>Preview</h2>
+                <div id="canvasContainer">
+                    <p class="placeholder-text">Upload foto untuk melihat preview</p>
+                    <canvas id="canvas"></canvas>
+                </div>
+                <button class="download-btn" id="downloadBtn" disabled>Download Twibbon</button>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h3>📋 Cara Menggunakan:</h3>
+            <ol>
+                <li>Klik tombol "Pilih Foto" untuk upload foto kamu</li>
+                <li>Geser foto dengan mouse atau touch untuk mengatur posisi</li>
+                <li>Gunakan slider untuk mengatur ukuran dan rotasi foto</li>
+                <li>Klik "Download Twibbon" untuk menyimpan hasil</li>
+            </ol>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 Saluran Whatsapp BERITAJKT48</p>
+        </footer>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const canvasContainer = document.getElementById('canvasContainer');
+        const imageUpload = document.getElementById('imageUpload');
+        const scaleRange = document.getElementById('scaleRange');
+        const rotateRange = document.getElementById('rotateRange');
+        const downloadBtn = document.getElementById('downloadBtn');
+
+        let userImage = null;
+        let frameImage = new Image();
+        let imageX = 0;
+        let imageY = 0;
+        let imageScale = 1;
+        let imageRotation = 0;
+        let isDragging = false;
+        let startX, startY;
+
+        // Set canvas size
+        canvas.width = 1024;
+        canvas.height = 1024;
+
+        // Load frame image
+        frameImage.crossOrigin = "anonymous";
+        frameImage.src = '/images/first-snow.png';
+
+        frameImage.onload = function() {
+            drawCanvas();
+        };
+
+        // Upload image
+        imageUpload.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    userImage = new Image();
+                    userImage.onload = function() {
+                        // Center the image
+                        imageX = canvas.width / 2;
+                        imageY = canvas.height / 2;
+                        imageScale = 1;
+                        imageRotation = 0;
+                        scaleRange.value = 100;
+                        rotateRange.value = 0;
+                        
+                        downloadBtn.disabled = false;
+                        
+                        drawCanvas();
+                    };
+                    userImage.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Scale control
+        scaleRange.addEventListener('input', function() {
+            imageScale = this.value / 100;
+            drawCanvas();
+        });
+
+        // Rotate control
+        rotateRange.addEventListener('input', function() {
+            imageRotation = this.value * (Math.PI / 180);
+            drawCanvas();
+        });
+
+        // Mouse drag events
+        canvas.addEventListener('mousedown', function(e) {
+            if (!userImage) return;
+            isDragging = true;
+            const rect = canvas.getBoundingClientRect();
+            startX = (e.clientX - rect.left) * (canvas.width / rect.width) - imageX;
+            startY = (e.clientY - rect.top) * (canvas.height / rect.height) - imageY;
+        });
+
+        canvas.addEventListener('mousemove', function(e) {
+            if (!isDragging || !userImage) return;
+            const rect = canvas.getBoundingClientRect();
+            imageX = (e.clientX - rect.left) * (canvas.width / rect.width) - startX;
+            imageY = (e.clientY - rect.top) * (canvas.height / rect.height) - startY;
+            drawCanvas();
+        });
+
+        canvas.addEventListener('mouseup', function() {
+            isDragging = false;
+        });
+
+        canvas.addEventListener('mouseleave', function() {
+            isDragging = false;
+        });
+
+        // Touch events for mobile
+        canvas.addEventListener('touchstart', function(e) {
+            if (!userImage) return;
+            e.preventDefault();
+            isDragging = true;
+            const rect = canvas.getBoundingClientRect();
+            const touch = e.touches[0];
+            startX = (touch.clientX - rect.left) * (canvas.width / rect.width) - imageX;
+            startY = (touch.clientY - rect.top) * (canvas.height / rect.height) - imageY;
+        });
+
+        canvas.addEventListener('touchmove', function(e) {
+            if (!isDragging || !userImage) return;
+            e.preventDefault();
+            const rect = canvas.getBoundingClientRect();
+            const touch = e.touches[0];
+            imageX = (touch.clientX - rect.left) * (canvas.width / rect.width) - startX;
+            imageY = (touch.clientY - rect.top) * (canvas.height / rect.height) - startY;
+            drawCanvas();
+        });
+
+        canvas.addEventListener('touchend', function() {
+            isDragging = false;
+        });
+
+        function drawCanvas() {
+            // Clear with white background
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw user image if exists
+            if (userImage) {
+                ctx.save();
+                ctx.translate(imageX, imageY);
+                ctx.rotate(imageRotation);
+                ctx.scale(imageScale, imageScale);
+                
+                const imgWidth = userImage.width;
+                const imgHeight = userImage.height;
+                
+                ctx.drawImage(userImage, -imgWidth / 2, -imgHeight / 2, imgWidth, imgHeight);
+                ctx.restore();
+            }
+            
+            // Draw frame on top (always visible)
+            if (frameImage.complete) {
+                ctx.drawImage(frameImage, 0, 0, canvas.width, canvas.height);
+            }
+        }
+
+        // Download button
+        downloadBtn.addEventListener('click', function() {
+            const link = document.createElement('a');
+            link.download = 'jkt48-twibbon-first-snow.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        });
+    </script>
+</body>
+</html>

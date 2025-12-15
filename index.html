@@ -429,14 +429,17 @@
         canvas.height = 1024;
 
         // Load frame image
-        frameImage.src = 'images/first-snow.png';
+        frameImage.src = '/images/first-snow.png';
 
         frameImage.onload = function() {
+            console.log('[v0] Frame loaded successfully');
             drawCanvas();
         };
 
         frameImage.onerror = function() {
-            console.log('[v0] Error loading frame image from images/first-snow.png');
+            console.log('[v0] Error loading frame, trying alternative path');
+            // Try relative path if absolute path fails
+            frameImage.src = 'images/first-snow.png';
         };
 
         // Upload image
